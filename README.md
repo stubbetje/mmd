@@ -1,0 +1,2 @@
+# mmd
+Make minimal docker
