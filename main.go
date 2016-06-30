@@ -2,11 +2,17 @@ package main
 
 import (
 	"fmt"
+	"flag"
 	"os"
 	"mmd"
 )
 
 func main() {
+
+	tempFolder := fmt.Sprintf( "%s%c%s-%d-tmp", os.TempDir(), os.PathSeparator, "mmd", os.Getpid() )
+	outputDir  := flag.String( "output-dir", tempFolder, "Output directory" )
+
+	flag.Parse()
 
 	bash := & mmd.Definition {
 		Files: []string {
@@ -27,11 +33,10 @@ func main() {
 	mmd.AddDefinition( bash )
 	mmd.AddDefinition( strace )
 
-	folder := fmt.Sprintf( "%s%c%s-%d-tmp", os.TempDir(), os.PathSeparator, "mmd", os.Getpid() )
 
-	fmt.Println( "folder = ", folder )
+	fmt.Println( "folder = ", *outputDir )
 
-	if err := mmd.Export( folder ); err != nil {
+	if err := mmd.Export( *outputDir ); err != nil {
 		panic( err )
 	}
 }
