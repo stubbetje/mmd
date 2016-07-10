@@ -1,0 +1,6 @@
+meta:
+    name: strace
+    author: Stefan Stubbe
+content:
+    - {file: /usr/bin/strace}
+    - {file: /usr/bin/strace-graph}

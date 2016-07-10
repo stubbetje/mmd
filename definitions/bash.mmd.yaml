@@ -1,0 +1,9 @@
+meta:
+    name: bash
+    author: Stefan Stubbe
+content:
+    - {file: /usr/bin/bash}
+    - {file: /usr/bin/ls}
+    - {file: /usr/bin/cat}
+    - {file: /usr/bin/less}
+    - {file: /usr/share/terminfo/x/xterm}

@@ -52,9 +52,9 @@ func ( mmd * Mmd ) Export( directory string ) error {
 	checked := make(map[string]bool)
 
 	for _, definition := range mmd.Definitions {
-		for _, file := range definition.Files {
-			files[ file ]   = true
-			tocheck[ file ] = true
+		for _, file := range definition.Content {
+			files[ file.File ]   = true
+			tocheck[ file.File ] = true
 		}
 	}
 

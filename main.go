@@ -14,29 +14,35 @@ func main() {
 
 	flag.Parse()
 
-	bash := & mmd.Definition {
-		Files: []string {
-			"/usr/bin/bash",
-			"/usr/bin/ls",
-			"/usr/bin/cat",
-			"/usr/bin/less",
-			"/usr/share/terminfo/x/xterm",
-		},
+//	bash,err := mmd.LoadFromYamlFile( "definitions/bash.mmd.yaml" )
+//	if( err != nil ) {
+//		panic( err )
+//	}
+//
+//	strace,err := mmd.LoadFromYamlFile( "definitions/strace.mmd.yaml" )
+//	if( err != nil ) {
+//		panic( err )
+//	}
+	fmt.Printf( "%v\n", flag.Args() )
+
+	obj := mmd.New()
+
+	for _, packageFile := range flag.Args() {
+		def, err := mmd.LoadFromYamlFile( packageFile )
+		if( err != nil ) {
+			panic( err )
+		}
+		obj.AddDefinition( def )
 	}
 
-	strace := & mmd.Definition {
-		Files: []string { "/usr/bin/strace" },
-	}
-
-	mmd := mmd.New()
-
-	mmd.AddDefinition( bash )
-	mmd.AddDefinition( strace )
-
+//	mmd.AddDefinition( bash )
+//	mmd.AddDefinition( strace )
 
 	fmt.Println( "folder = ", *outputDir )
 
-	if err := mmd.Export( *outputDir ); err != nil {
+	fmt.Printf( "%v\n", obj )
+
+	if err := obj.Export( *outputDir ); err != nil {
 		panic( err )
 	}
 }
