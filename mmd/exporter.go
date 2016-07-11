@@ -8,18 +8,18 @@ import (
 	"fmt"
 )
 
-type Mmd struct {
+type Exporter struct {
 	Definitions []Definition
 }
 
-func New() ( *Mmd ) {
-	return & Mmd {
+func NewExporter() ( *Exporter ) {
+	return & Exporter {
 		Definitions: make([]Definition,0),
 	}
 }
 
-func ( mmd * Mmd ) AddDefinition( definition * Definition ) {
-	mmd.Definitions = append( mmd.Definitions, *definition )
+func ( exporter * Exporter ) AddDefinition( definition * Definition ) {
+	exporter.Definitions = append( exporter.Definitions, *definition )
 }
 
 func copyFileContents(src, dst string) (err error) {
@@ -45,13 +45,13 @@ func copyFileContents(src, dst string) (err error) {
 	return
 }
 
-func ( mmd * Mmd ) Export( directory string ) error {
+func ( exporter * Exporter ) Export( directory string ) error {
 
 	files   := make(map[string]bool)
 	tocheck := make(map[string]bool)
 	checked := make(map[string]bool)
 
-	for _, definition := range mmd.Definitions {
+	for _, definition := range exporter.Definitions {
 		for _, file := range definition.Content {
 			files[ file.File ]   = true
 			tocheck[ file.File ] = true

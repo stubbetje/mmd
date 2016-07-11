@@ -1,5 +1,5 @@
 
-mmd_src = main.go ldd/ldd.go ldd/parser.go mmd/mmd.go mmd/definition.go
+mmd_src = main.go ldd/ldd.go ldd/parser.go mmd/exporter.go mmd/definition.go
 
 run: build/mmd
 	rm -Rvf /tmp/mmd-*-tmp/

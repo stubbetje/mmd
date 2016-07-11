@@ -25,14 +25,14 @@ func main() {
 //	}
 	fmt.Printf( "%v\n", flag.Args() )
 
-	obj := mmd.New()
+	exporter := mmd.NewExporter()
 
 	for _, packageFile := range flag.Args() {
 		def, err := mmd.LoadFromYamlFile( packageFile )
 		if( err != nil ) {
 			panic( err )
 		}
-		obj.AddDefinition( def )
+		exporter.AddDefinition( def )
 	}
 
 //	mmd.AddDefinition( bash )
@@ -40,9 +40,9 @@ func main() {
 
 	fmt.Println( "folder = ", *outputDir )
 
-	fmt.Printf( "%v\n", obj )
+	fmt.Printf( "%v\n", exporter )
 
-	if err := obj.Export( *outputDir ); err != nil {
+	if err := exporter.Export( *outputDir ); err != nil {
 		panic( err )
 	}
 }
